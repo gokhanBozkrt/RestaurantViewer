@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>89824112438-c25svbfu15shqv4qsq97cb9idc75kblb.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.89824112438-c25svbfu15shqv4qsq97cb9idc75kblb</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC0pP5AOD6a9Otspnz61M5bGxImJwg7VUU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>89824112438</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.BozkurtGokhan.RestaurantReviewer</string>
+	<key>PROJECT_ID</key>
+	<string>restaurantreviewer-1b736</string>
+	<key>STORAGE_BUCKET</key>
+	<string>restaurantreviewer-1b736.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:89824112438:ios:abfad6493c174e1d918d97</string>
+</dict>
+</plist>
