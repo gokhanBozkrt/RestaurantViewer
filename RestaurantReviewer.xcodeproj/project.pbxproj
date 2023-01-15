@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F7021A3529733C84002FF293 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7021A3429733C84002FF293 /* ReviewViewModel.swift */; };
 		F703661B29689D8100B8D849 /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F703661A29689D8100B8D849 /* Spot.swift */; };
 		F703661D29689EDC00B8D849 /* SpotDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F703661C29689EDC00B8D849 /* SpotDetailView.swift */; };
 		F703661F2968A14000B8D849 /* SpotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F703661E2968A14000B8D849 /* SpotViewModel.swift */; };
@@ -24,9 +25,13 @@
 		F7A70D1B296CA7FD00AA24EF /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A70D17296CA7FD00AA24EF /* Place.swift */; };
 		F7EF65832966F871005428E5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EF65822966F871005428E5 /* LoginView.swift */; };
 		F7EF6585296711AA005428E5 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EF6584296711AA005428E5 /* ListView.swift */; };
+		F7FC97EB296DB7E900BB57DE /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FC97EA296DB7E900BB57DE /* Review.swift */; };
+		F7FC97F0296DB9EA00BB57DE /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FC97EF296DB9EA00BB57DE /* ReviewView.swift */; };
+		F7FC97F2296DC06900BB57DE /* StarSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FC97F1296DC06900BB57DE /* StarSelectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F7021A3429733C84002FF293 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
 		F703661A29689D8100B8D849 /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
 		F703661C29689EDC00B8D849 /* SpotDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailView.swift; sourceTree = "<group>"; };
 		F703661E2968A14000B8D849 /* SpotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotViewModel.swift; sourceTree = "<group>"; };
@@ -42,6 +47,9 @@
 		F7A70D17296CA7FD00AA24EF /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		F7EF65822966F871005428E5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		F7EF6584296711AA005428E5 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		F7FC97EA296DB7E900BB57DE /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		F7FC97EF296DB9EA00BB57DE /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
+		F7FC97F1296DC06900BB57DE /* StarSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,15 +88,9 @@
 			children = (
 				F794F2252966E9E30083948F /* Info.plist */,
 				F794F2172966E8500083948F /* RestaurantReviewerApp.swift */,
-				F703661A29689D8100B8D849 /* Spot.swift */,
-				F703661E2968A14000B8D849 /* SpotViewModel.swift */,
-				F7EF65822966F871005428E5 /* LoginView.swift */,
-				F7EF6584296711AA005428E5 /* ListView.swift */,
-				F7A70D16296CA7FD00AA24EF /* LocationManager.swift */,
-				F7A70D17296CA7FD00AA24EF /* Place.swift */,
-				F7A70D14296CA7FD00AA24EF /* PlaceLookupView.swift */,
-				F7A70D15296CA7FD00AA24EF /* PlaceViewModel.swift */,
-				F703661C29689EDC00B8D849 /* SpotDetailView.swift */,
+				F7FC97EC296DB80A00BB57DE /* Models */,
+				F7FC97ED296DB84200BB57DE /* ViewModels */,
+				F7FC97EE296DB86900BB57DE /* Views */,
 				F794F21B2966E8520083948F /* Assets.xcassets */,
 				F794F22F2966EEFE0083948F /* GoogleService-Info.plist */,
 				F794F21D2966E8520083948F /* Preview Content */,
@@ -102,6 +104,40 @@
 				F794F21E2966E8520083948F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F7FC97EC296DB80A00BB57DE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F7FC97EA296DB7E900BB57DE /* Review.swift */,
+				F703661A29689D8100B8D849 /* Spot.swift */,
+				F7A70D17296CA7FD00AA24EF /* Place.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F7FC97ED296DB84200BB57DE /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F703661E2968A14000B8D849 /* SpotViewModel.swift */,
+				F7021A3429733C84002FF293 /* ReviewViewModel.swift */,
+				F7A70D15296CA7FD00AA24EF /* PlaceViewModel.swift */,
+				F7A70D16296CA7FD00AA24EF /* LocationManager.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		F7FC97EE296DB86900BB57DE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F7EF65822966F871005428E5 /* LoginView.swift */,
+				F7EF6584296711AA005428E5 /* ListView.swift */,
+				F703661C29689EDC00B8D849 /* SpotDetailView.swift */,
+				F7A70D14296CA7FD00AA24EF /* PlaceLookupView.swift */,
+				F7FC97EF296DB9EA00BB57DE /* ReviewView.swift */,
+				F7FC97F1296DC06900BB57DE /* StarSelectionView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,14 +222,18 @@
 			files = (
 				F7A70D19296CA7FD00AA24EF /* PlaceViewModel.swift in Sources */,
 				F703661D29689EDC00B8D849 /* SpotDetailView.swift in Sources */,
+				F7021A3529733C84002FF293 /* ReviewViewModel.swift in Sources */,
 				F7A70D18296CA7FD00AA24EF /* PlaceLookupView.swift in Sources */,
 				F7EF6585296711AA005428E5 /* ListView.swift in Sources */,
+				F7FC97F0296DB9EA00BB57DE /* ReviewView.swift in Sources */,
 				F703661F2968A14000B8D849 /* SpotViewModel.swift in Sources */,
 				F7EF65832966F871005428E5 /* LoginView.swift in Sources */,
+				F7FC97EB296DB7E900BB57DE /* Review.swift in Sources */,
 				F794F2182966E8500083948F /* RestaurantReviewerApp.swift in Sources */,
 				F703661B29689D8100B8D849 /* Spot.swift in Sources */,
 				F7A70D1A296CA7FD00AA24EF /* LocationManager.swift in Sources */,
 				F7A70D1B296CA7FD00AA24EF /* Place.swift in Sources */,
+				F7FC97F2296DC06900BB57DE /* StarSelectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +366,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RestaurantReviewer/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app requires access to the device location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires access to the device location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -355,6 +397,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RestaurantReviewer/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "This app requires access to the device location";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires access to the device location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
