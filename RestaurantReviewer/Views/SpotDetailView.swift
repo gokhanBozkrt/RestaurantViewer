@@ -29,6 +29,14 @@ struct SpotDetailView: View {
     @State private var annotations = [Annotation]()
     // The variable below does not have the right path.We will change tihs .onAppear
     @FirestoreQuery(collectionPath: "spots") var reviews: [Review]
+    var avgRating: String {
+        guard reviews.count != 0 else {
+            return "-.-"
+        }
+        let averageValue = Double(reviews.reduce(0) { $0 + $1.rating }) / Double(reviews.count)
+        return String(format: "%.1f", averageValue)
+    }
+    
     var previewRunning = false
 
     var body: some View {
@@ -63,7 +71,7 @@ struct SpotDetailView: View {
                         NavigationLink {
                             ReviewView(spot: spot, review: review)
                         } label: {
-                            Text(review.title)
+                            SpotReviewRowView(review: review)
                         }
 
                     }
@@ -73,7 +81,7 @@ struct SpotDetailView: View {
                         Text("Avg. Rating:")
                             .font(.title2)
                             .bold()
-                        Text("4.5")
+                        Text(avgRating)
                             .font(.title)
                             .fontWeight(.black)
                             .foregroundColor(Color("SnackColor"))
