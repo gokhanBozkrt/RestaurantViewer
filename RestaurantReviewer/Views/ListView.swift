@@ -11,19 +11,21 @@ import SwiftUI
 
 
 struct ListView: View {
-    @FirestoreQuery(collectionPath: "spots") var spots: [Spot]
+    @FirestoreQuery(collectionPath: "spots",predicates: [.orderBy("name", false)]) var spots: [Spot]
     @Environment(\.dismiss) private var dismiss
     @State private var sheetIsPresented = false
+
     var body: some View {
         NavigationStack {
-            List(spots) { spot in
-                NavigationLink {
-                    SpotDetailView(spot: spot)
-                } label: {
-                    Text(spot.name)
-                        .font(.title2)
+            List {
+                ForEach(spots) { spot in
+                    NavigationLink {
+                        SpotDetailView(spot: spot)
+                    } label: {
+                        Text(spot.name)
+                            .font(.title2)
+                    }
                 }
-
             }
             .listStyle(.plain)
             .navigationTitle("Restaurants")

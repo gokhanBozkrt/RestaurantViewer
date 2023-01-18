@@ -179,7 +179,7 @@ struct SpotDetailView: View {
                 ReviewView(spot: spot, review: Review())
             }
         }
-        .alert("Cannot RAte Place Unless It is SAved", isPresented: $showSaveAlert) {
+        .alert("Cannot Rate Place Unless It is Saved", isPresented: $showSaveAlert) {
             Button("Cancel",role: .cancel) { }
             Button("Save",role: .none) {
                 Task {

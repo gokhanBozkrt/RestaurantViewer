@@ -37,5 +37,22 @@ class SpotViewModel: ObservableObject {
             }
         }
     }
-    
+    /*
+    func deleteSpot(spot: Spot) async -> Bool {
+        let db = Firestore.firestore()
+        guard let spotID = spot.id else {
+            print("😡 ERROR: spot.id: \(spot.id ?? "nil").This should not have happened.")
+            return false
+        }
+        do {
+            let _ = try await db.collection("spots").document(spotID).delete()
+            print("🗑️ Document successfully deleted.")
+            return true
+        } catch {
+            print("😡 ERROR: Removing dovument: \(error.localizedDescription)")
+            return false
+        }
+    }
+    */
 }
+

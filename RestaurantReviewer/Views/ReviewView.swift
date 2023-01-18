@@ -5,17 +5,22 @@
 //  Created by Gökhan Bozkurt on 10.01.2023.
 //
 
+import CoreHaptics
 import Firebase
 import SwiftUI
 
 struct ReviewView: View {
-    
+    @State private var engine: CHHapticEngine?
     @State var spot: Spot
     @State var review: Review
     @State private var rateOrReviewerString = "Click to Rate:"
+    @State private var showDeleteAlert = false
+    @State private var deleteAlertMessage = "This review will be deleted permenantly."
+   
     @Environment(\.dismiss) private var  dismiss
     @State private var postedByThisUser = false
     @StateObject var reviewVM = ReviewViewModel()
+    
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
@@ -81,6 +86,7 @@ struct ReviewView: View {
                 let reviewPostedOn = review.postedOn.formatted(date: .numeric, time: .omitted)
                 rateOrReviewerString = "by: \(review.reviewer) on: \(reviewPostedOn)"
             }
+            prepareHaptics()
         }
         .toolbar {
             if postedByThisUser {
@@ -103,13 +109,75 @@ struct ReviewView: View {
                        
                     }
                 }
+                if review.id != nil {
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Spacer()
+                        Button {
+                            showDeleteAlert.toggle()
+                        } label: {
+                            Image(systemName: "trash")
+                        }
+
+                    }
+                }
+            }
+        }
+        .alert("Are you deleting this review", isPresented: $showDeleteAlert) {
+            Button("Delete", role: .destructive) { deleteReview() }
+            Button("Cancel",role: .cancel) { }
+            
+        } message: {
+            Text(deleteAlertMessage)
+        }
+    }
+    
+    func deleteReview() {
+        Task {
+            let success = await reviewVM.deleteReview(spot: spot, review: review)
+            if success {
+                dismiss()
+                complexSucces()
             }
         }
     }
+
 }
 
 struct ReviewView_Previews: PreviewProvider {
     static var previews: some View {
         ReviewView(spot: Spot(name: "Kurucu Kazım",address: "18A,Karatay Eski Çarşı"), review: Review())
+    }
+}
+
+
+
+extension ReviewView {
+    func prepareHaptics() {
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+        do {
+            engine = try CHHapticEngine()
+            try engine?.start()
+        } catch {
+            print("There was an error crating the engine:\(error.localizedDescription)")
+        }
+    }
+    func complexSucces() {
+    // Make sure that device supports haptics
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+        var events = [CHHapticEvent]()
+        
+        // CREATE ONE INTENSE; SHARP TAP
+        let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 1)
+        let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 1)
+        let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity,sharpness], relativeTime: 0)
+        events.append(event)
+        do {
+            let pattern = try CHHapticPattern(events: events, parameters: [])
+            let player = try engine?.makePlayer(with: pattern)
+            try player?.start(atTime: 0)
+        } catch {
+            print("Failed to play patterns: \(error.localizedDescription)")
+        }
+        
     }
 }

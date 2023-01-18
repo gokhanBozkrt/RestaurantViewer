@@ -8,6 +8,7 @@
 import FirebaseFirestore
 import Foundation
 
+@MainActor
 class ReviewViewModel: ObservableObject {
     @Published var review = Review()
     
@@ -39,5 +40,19 @@ class ReviewViewModel: ObservableObject {
             }
         }
     }
-    
+    func deleteReview(spot: Spot, review: Review) async -> Bool {
+        let db = Firestore.firestore()
+        guard let spotID = spot.id, let reviewID = review.id else {
+            print("😡 ERROR: spot.id: \(spot.id ?? "nil"), review.id: \(review.id ?? "nil").This should not have happened.")
+            return false
+        }
+        do {
+            let _ = try await db.collection("spots").document(spotID).collection("reviews").document(reviewID).delete()
+            print("🗑️ Document successfully deleted.")
+            return true
+        } catch {
+            print("😡 ERROR: Removing dovument: \(error.localizedDescription)")
+            return false
+        }
+    }
 }
