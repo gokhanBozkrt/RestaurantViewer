@@ -78,6 +78,7 @@ struct ReviewView: View {
        
             Spacer()
         }
+    
         .navigationBarBackButtonHidden(postedByThisUser) // Hide back button if posted by this user
         .onAppear {
             if review.reviewer == Auth.auth().currentUser?.email {
@@ -106,9 +107,9 @@ struct ReviewView: View {
                                 print("😡")
                             }
                         }
-                       
                     }
                 }
+                
                 if review.id != nil {
                     ToolbarItemGroup(placement: .bottomBar) {
                         Spacer()

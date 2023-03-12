@@ -11,7 +11,10 @@
 		F703661B29689D8100B8D849 /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F703661A29689D8100B8D849 /* Spot.swift */; };
 		F703661D29689EDC00B8D849 /* SpotDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F703661C29689EDC00B8D849 /* SpotDetailView.swift */; };
 		F703661F2968A14000B8D849 /* SpotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F703661E2968A14000B8D849 /* SpotViewModel.swift */; };
+		F71BCA8D299F96A1009E1397 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71BCA8C299F96A1009E1397 /* Photo.swift */; };
+		F7226FAD29A27AF3000BA2BC /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7226FAC29A27AF3000BA2BC /* PhotoView.swift */; };
 		F74026D329756A3900B8CBDE /* SpotReviewRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74026D229756A3900B8CBDE /* SpotReviewRowView.swift */; };
+		F7540EB229ABB20A0060C919 /* SpotDetailPhotoScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7540EB129ABB20A0060C919 /* SpotDetailPhotoScrollView.swift */; };
 		F794F2182966E8500083948F /* RestaurantReviewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F794F2172966E8500083948F /* RestaurantReviewerApp.swift */; };
 		F794F21C2966E8520083948F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F794F21B2966E8520083948F /* Assets.xcassets */; };
 		F794F21F2966E8520083948F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F794F21E2966E8520083948F /* Preview Assets.xcassets */; };
@@ -36,7 +39,10 @@
 		F703661A29689D8100B8D849 /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
 		F703661C29689EDC00B8D849 /* SpotDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailView.swift; sourceTree = "<group>"; };
 		F703661E2968A14000B8D849 /* SpotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotViewModel.swift; sourceTree = "<group>"; };
+		F71BCA8C299F96A1009E1397 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		F7226FAC29A27AF3000BA2BC /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		F74026D229756A3900B8CBDE /* SpotReviewRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotReviewRowView.swift; sourceTree = "<group>"; };
+		F7540EB129ABB20A0060C919 /* SpotDetailPhotoScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailPhotoScrollView.swift; sourceTree = "<group>"; };
 		F794F2142966E8500083948F /* RestaurantReviewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RestaurantReviewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F794F2172966E8500083948F /* RestaurantReviewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantReviewerApp.swift; sourceTree = "<group>"; };
 		F794F21B2966E8520083948F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -113,6 +119,7 @@
 			children = (
 				F7FC97EA296DB7E900BB57DE /* Review.swift */,
 				F703661A29689D8100B8D849 /* Spot.swift */,
+				F71BCA8C299F96A1009E1397 /* Photo.swift */,
 				F7A70D17296CA7FD00AA24EF /* Place.swift */,
 			);
 			path = Models;
@@ -135,9 +142,11 @@
 				F7EF65822966F871005428E5 /* LoginView.swift */,
 				F7EF6584296711AA005428E5 /* ListView.swift */,
 				F703661C29689EDC00B8D849 /* SpotDetailView.swift */,
+				F7540EB129ABB20A0060C919 /* SpotDetailPhotoScrollView.swift */,
 				F74026D229756A3900B8CBDE /* SpotReviewRowView.swift */,
 				F7A70D14296CA7FD00AA24EF /* PlaceLookupView.swift */,
 				F7FC97EF296DB9EA00BB57DE /* ReviewView.swift */,
+				F7226FAC29A27AF3000BA2BC /* PhotoView.swift */,
 				F7FC97F1296DC06900BB57DE /* StarSelectionView.swift */,
 			);
 			path = Views;
@@ -223,8 +232,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F71BCA8D299F96A1009E1397 /* Photo.swift in Sources */,
 				F7A70D19296CA7FD00AA24EF /* PlaceViewModel.swift in Sources */,
 				F703661D29689EDC00B8D849 /* SpotDetailView.swift in Sources */,
+				F7226FAD29A27AF3000BA2BC /* PhotoView.swift in Sources */,
 				F7021A3529733C84002FF293 /* ReviewViewModel.swift in Sources */,
 				F7A70D18296CA7FD00AA24EF /* PlaceLookupView.swift in Sources */,
 				F7EF6585296711AA005428E5 /* ListView.swift in Sources */,
@@ -238,6 +249,7 @@
 				F7A70D1A296CA7FD00AA24EF /* LocationManager.swift in Sources */,
 				F7A70D1B296CA7FD00AA24EF /* Place.swift in Sources */,
 				F7FC97F2296DC06900BB57DE /* StarSelectionView.swift in Sources */,
+				F7540EB229ABB20A0060C919 /* SpotDetailPhotoScrollView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

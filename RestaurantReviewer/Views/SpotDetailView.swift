@@ -7,8 +7,15 @@
 import FirebaseFirestoreSwift
 import MapKit
 import SwiftUI
+import PhotosUI
 
 struct SpotDetailView: View {
+    enum ButtonPressed {
+        case review,photo
+    }
+    
+    
+    @State private var selectedPhoto: PhotosPickerItem?
     
     struct Annotation: Identifiable {
         let id = UUID().uuidString
@@ -19,16 +26,21 @@ struct SpotDetailView: View {
     @EnvironmentObject var spotVM: SpotViewModel
     @EnvironmentObject var locationManager: LocationManager
     @State var spot: Spot
+    @State private var newPhoto = Photo()
     @Environment(\.dismiss) private var dismiss
     @State private var showPlaceLookupSheet = false
     @State private var showReviewSheet = false
+    @State private var showPhotoSheet = false
     @State private var showSaveAlert = false
     @State private var showingAsSheet = false
+    @State private var buttonPressed = ButtonPressed.review
+    @State private var uiImageSelected = UIImage()
     @State private var  mapRegion = MKCoordinateRegion()
     let regionSize = 500.0 // meters
     @State private var annotations = [Annotation]()
     // The variable below does not have the right path.We will change tihs .onAppear
     @FirestoreQuery(collectionPath: "spots") var reviews: [Review]
+    @FirestoreQuery(collectionPath: "spots") var photos: [Photo]
     var avgRating: String {
         guard reviews.count != 0 else {
             return "-.-"
@@ -52,7 +64,6 @@ struct SpotDetailView: View {
             .overlay {
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(.gray.opacity(0.5),lineWidth: spot.id == nil ? 2 : 0)
-                
             }
             .padding(.horizontal)
             
@@ -64,6 +75,67 @@ struct SpotDetailView: View {
                 annotations = [Annotation(name: spot.name, address: spot.address, coordinate: spot.coordinate)]
                 mapRegion.center = spot.coordinate
             }
+            SpotDetailPhotoScrollView(photos: photos, spot: spot)
+            HStack {
+                Group {
+                    Text("Avg. Rating:")
+                        .font(.title2)
+                        .bold()
+                    Text(avgRating)
+                        .font(.title)
+                        .fontWeight(.black)
+                        .foregroundColor(Color("SnackColor"))
+                }
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                Spacer()
+                
+                Group {
+                    PhotosPicker(selection: $selectedPhoto,matching: .images,preferredItemEncoding: .automatic) {
+                        Image(systemName: "photo")
+                            Text("Photo")
+                    }
+                    .onChange(of: selectedPhoto) { newValue in
+                        Task {
+                            do {
+                                if let data = try await newValue?.loadTransferable(type: Data.self) {
+                                    if let uiImage = UIImage(data: data) {
+                                       uiImageSelected = uiImage
+                                        newPhoto = Photo()
+                                        print("📸 Successfully selected image!")
+                                        buttonPressed = .photo
+                                        if spot.id == nil {
+                                            showSaveAlert.toggle()
+                                        } else {
+                                            showPhotoSheet.toggle()
+                                        }
+                                    }
+                                }
+                            } catch {
+                                print("😡😡😡 Failed pick a picture ")
+                            }
+                        }
+                    }
+                    Button(action: {
+                        buttonPressed = .review
+                        if spot.id == nil {
+                            showSaveAlert.toggle()
+                        } else {
+                            showReviewSheet.toggle()
+                        }
+                    }, label: {
+                        Image(systemName: "star.fill")
+                        Text("Rate")
+                    })
+                }
+                .font(.caption2)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                .buttonStyle(.borderedProminent)
+                .tint(Color("SnackColor"))
+               
+            }
+            .padding(.horizontal)
             
             List {
                 Section {
@@ -76,31 +148,9 @@ struct SpotDetailView: View {
 
                     }
                     
-                } header: {
-                    HStack {
-                        Text("Avg. Rating:")
-                            .font(.title2)
-                            .bold()
-                        Text(avgRating)
-                            .font(.title)
-                            .fontWeight(.black)
-                            .foregroundColor(Color("SnackColor"))
-                        Spacer()
-                        Button("Rate it") {
-                            if spot.id == nil {
-                                showSaveAlert.toggle()
-                            } else {
-                                showReviewSheet.toggle()
-                            }
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .bold()
-                        .tint(Color("SnackColor"))
-                    }
                 }
 
             }
-            .headerProminence(.increased)
             .listStyle(.plain)
             Spacer()
             
@@ -110,6 +160,9 @@ struct SpotDetailView: View {
             if !previewRunning && spot.id != nil {
                 $reviews.path = "spots/\(spot.id ?? "")/reviews"
                 print("reviews.path = \($reviews.path)")
+                
+                $photos.path = "spots/\(spot.id ?? "")/photos"
+                print("photos.path = \($photos.path)")
             } else {
                 // spot id starts out as nil
                 showingAsSheet = true
@@ -179,6 +232,11 @@ struct SpotDetailView: View {
                 ReviewView(spot: spot, review: Review())
             }
         }
+        .sheet(isPresented: $showPhotoSheet) {
+            NavigationStack {
+                PhotoView(uiImage: uiImageSelected, spot: spot, photo: $newPhoto)
+            }
+        }
         .alert("Cannot Rate Place Unless It is Saved", isPresented: $showSaveAlert) {
             Button("Cancel",role: .cancel) { }
             Button("Save",role: .none) {
@@ -188,6 +246,13 @@ struct SpotDetailView: View {
                     if success {
                         // if we didnt update the path after saving spot, we wouldnt be able to show new reviews added
                         $reviews.path = "spots/\(spot.id ?? "")/reviews"
+                       $photos.path = "spots/\(spot.id ?? "")/photos"
+                        switch buttonPressed {
+                        case .review:
+                            showReviewSheet.toggle()
+                        case .photo:
+                            showPhotoSheet.toggle()
+                        }
                         showReviewSheet.toggle()
                     } else {
                         print("😡 Dang! Eror saving spot!")
